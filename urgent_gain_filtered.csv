@@ -1,0 +1,19 @@
+timestamp,browser,country,url,link_id,platform,referer,utm_source,utm_medium
+2023-10-18 18:33:52,Chrome,PH,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,windows,https://app.intercom.com/,gain,urgent
+2023-10-25 15:17:30,Chrome,PH,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,windows,https://app.intercom.com/,gain,urgent
+2023-10-25 15:17:44,Chrome,PH,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,windows,https://app.intercom.com/,gain,urgent
+2023-10-25 15:18:36,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,linux,,gain,urgent
+2023-10-25 15:21:36,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,mac,https://app2.simpletexting.com/,gain,urgent
+2023-10-25 15:30:23,iPhone,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,ios,,gain,urgent
+2023-10-25 15:30:23,iPhone,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,ios,,gain,urgent
+2023-10-25 15:37:30,Other,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,other,,gain,urgent
+2023-10-25 15:43:54,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,android,,gain,urgent
+2023-10-25 15:43:59,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,linux,,gain,urgent
+2023-10-25 19:58:33,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,android,,gain,urgent
+2023-10-25 23:04:08,iPhone,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,ios,,gain,urgent
+2023-10-25 23:04:08,iPhone,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,ios,,gain,urgent
+2023-10-26 01:01:35,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,linux,,gain,urgent
+2023-10-26 18:24:55,iPhone,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,ios,https://www.google.com/,gain,urgent
+2023-10-26 18:25:01,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,android,https://www.google.com/,gain,urgent
+2023-10-28 17:02:25,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,android,,gain,urgent
+2023-10-28 17:03:16,Chrome,US,https://www.1960landing.com/?utm_campaign=1960&utm_medium=urgent&utm_source=gain,28119489,android,,gain,urgent

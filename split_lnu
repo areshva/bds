@@ -1,0 +1,22 @@
+import pandas as pd
+
+# Path of your filtered CSV
+input_file_path = '02909_c.csv'
+
+# Read the filtered csv file into a pandas DataFrame
+df = pd.read_csv(input_file_path)
+
+# Check if the DataFrame has at least 300 rows
+if len(df) < 300:
+    raise ValueError("The input file does not have enough rows (at least 300 required)")
+
+# Extract the last 300 rows from the DataFrame
+last_300_rows = df.tail(300)
+
+# Define the name of the output file
+output_file = "loss-nu2.csv"
+
+# Write the last 300 rows to the output CSV file
+last_300_rows.to_csv(output_file, index=False)
+
+print(f"{output_file} has been created with the last 300 rows.")
