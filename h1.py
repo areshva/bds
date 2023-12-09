@@ -1,5 +1,8 @@
 import pandas as pd
 from urllib.parse import urlparse, parse_qs
+import matplotlib.pyplot as plt
+import pandas as pd
+from scipy.stats import ttest_ind, f_oneway
 
 # 1. Load the CSV and Extract UTM Parameters
 click_data_path = 'clicks.csv'
@@ -67,6 +70,33 @@ for condition, total_sent in total_sent.items():
 
 stats_df = pd.DataFrame(stats_data)
 print(stats_df)
+
+# Extracting data for gain and loss conditions
+gain_data = stats_df[stats_df['condition'].str.contains('gain')]
+loss_data = stats_df[stats_df['condition'].str.contains('loss')]
+
+# T-tests for click rates
+ttest_click_rate = ttest_ind(gain_data['click_rate'], loss_data['click_rate'])
+print("T-test for Click Rates:")
+print(f"Statistic: {ttest_click_rate.statistic:.3f}, P-value: {ttest_click_rate.pvalue:.3f}\n")
+
+# ANOVA for mean response times
+anova_mean_time = f_oneway(gain_data['mean_time'], loss_data['mean_time'])
+print("ANOVA for Mean Response Times:")
+print(f"Statistic: {anova_mean_time.statistic:.3f}, P-value: {anova_mean_time.pvalue:.3f}\n")
+
+# Output interpretation
+print("Interpretation:")
+if ttest_click_rate.pvalue < 0.05:
+    print("The difference in click rates between gain-framed and loss-framed conditions is statistically significant.")
+else:
+    print("There is no statistically significant difference in click rates between gain-framed and loss-framed conditions.")
+
+if anova_mean_time.pvalue < 0.05:
+    print("The difference in mean response times between gain-framed and loss-framed conditions is statistically significant.")
+else:
+    print("There is no statistically significant difference in mean response times between gain-framed and loss-framed conditions.")
+
 
 # total_sent = {
 #     'gain-urgent': 232,
