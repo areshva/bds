@@ -4,7 +4,7 @@ from urllib.parse import urlparse, parse_qs
 # 1. Load the CSV and Extract UTM Parameters
 click_data_path = 'clicks.csv'
 click_df = pd.read_csv(click_data_path, parse_dates=['timestamp'])
-
+print(click_df)
 def extract_utm_parameters(url):
     params = parse_qs(urlparse(url).query)
     return params.get('utm_source', [None])[0], params.get('utm_medium', [None])[0]
@@ -18,7 +18,7 @@ sent_times = {
     'neutral-urgent': pd.Timestamp('2023-10-18 18:30:00'),
     'neutral-noturgent': pd.Timestamp('2023-10-25 17:33:00'),
     'loss-urgent': pd.Timestamp('2023-10-25 15:16:00'),
-   # 'loss-noturgent': pd.Timestamp('2023-11-25 16:13:00')
+    'loss-noturgent': pd.Timestamp('2023-11-25 15:13:00')
 }
 
 
@@ -47,18 +47,14 @@ stats_data = {
     'click_rate': []
 }
 
-total_links_sent = {
-    'gain-urgent': 232, 
-    'neutral-urgent': 213,  
-    'loss-urgent': 202  
-}
+
 total_sent = {
     'gain-urgent': 232,
     'neutral-urgent': 213,
     'loss-urgent': 202,
     'gain-noturgent': 201,
     'neutral-noturgent': 211,
-   # 'loss-noturgent': 204,
+    'loss-noturgent': 204,
 
 }
 
@@ -72,43 +68,43 @@ for condition, total_sent in total_sent.items():
 stats_df = pd.DataFrame(stats_data)
 print(stats_df)
 
-total_sent = {
-    'gain-urgent': 232,
-    'neutral-urgent': 213,
-    'loss-urgent': 202,
-    'gain-noturgent': 201,
-    'neutral-noturgent': 211,
+# total_sent = {
+#     'gain-urgent': 232,
+#     'neutral-urgent': 213,
+#     'loss-urgent': 202,
+#     'gain-noturgent': 201,
+#     'neutral-noturgent': 211,
 
-}
+# }
 
-clicked_counts = {
-    'gain-urgent': total_clicks.get('gain-urgent', 0),
-    'neutral-urgent': total_clicks.get('neutral-urgent', 0),
-    'loss-urgent': total_clicks.get('loss-urgent', 0),
-    'gain-noturgent': total_clicks.get('gain-noturgent', 0),
-    'neutral-noturgent': total_clicks.get('neutral-noturgent', 0)
+# clicked_counts = {
+#     'gain-urgent': total_clicks.get('gain-urgent', 0),
+#     'neutral-urgent': total_clicks.get('neutral-urgent', 0),
+#     'loss-urgent': total_clicks.get('loss-urgent', 0),
+#     'gain-noturgent': total_clicks.get('gain-noturgent', 0),
+#     'neutral-noturgent': total_clicks.get('neutral-noturgent', 0)
 
-}
+# }
 
-not_clicked_counts = {key: total_sent[key] - clicked_counts[key] for key in clicked_counts.keys()}
+# not_clicked_counts = {key: total_sent[key] - clicked_counts[key] for key in clicked_counts.keys()}
 
-contingency_table = pd.DataFrame({
-    'Condition': ['gain-urgent', 'neutral-urgent', 'loss-urgent'],
-    'Clicked': [clicked_counts['gain-urgent'], clicked_counts['neutral-urgent'], clicked_counts['loss-urgent']],
-    'Not-Clicked': [not_clicked_counts['gain-urgent'], not_clicked_counts['neutral-urgent'], not_clicked_counts['loss-urgent']]
-})
+# contingency_table = pd.DataFrame({
+#     'Condition': ['gain-urgent', 'neutral-urgent', 'loss-urgent'],
+#     'Clicked': [clicked_counts['gain-urgent'], clicked_counts['neutral-urgent'], clicked_counts['loss-urgent']],
+#     'Not-Clicked': [not_clicked_counts['gain-urgent'], not_clicked_counts['neutral-urgent'], not_clicked_counts['loss-urgent']]
+# })
 
-print(contingency_table)
+# print(contingency_table)
 
-contingency_table.to_csv('contingency_table_h1.csv', index=False)
+# contingency_table.to_csv('contingency_table_h1.csv', index=False)
 
 
-from scipy.stats import chi2_contingency
+# from scipy.stats import chi2_contingency
 
-# Using the Clicked and Not-Clicked columns for the Chi-squared test
-observed = contingency_table[['Clicked', 'Not-Clicked']].values
+# # Using the Clicked and Not-Clicked columns for the Chi-squared test
+# observed = contingency_table[['Clicked', 'Not-Clicked']].values
 
-chi2, p, _, _ = chi2_contingency(observed)
+# chi2, p, _, _ = chi2_contingency(observed)
 
-print(f"Chi2 value: {chi2}")
-print(f"P-value: {p}")
+# print(f"Chi2 value: {chi2}")
+# print(f"P-value: {p}")

@@ -18,7 +18,8 @@ sent_times = {
     'gain-noturgent': pd.Timestamp('2023-10-25 17:57:00'),
     'neutral-urgent': pd.Timestamp('2023-10-18 18:30:00'),
     'neutral-noturgent': pd.Timestamp('2023-10-25 17:33:00'),
-    'loss-urgent': pd.Timestamp('2023-10-25 15:16:00')
+    'loss-urgent': pd.Timestamp('2023-10-25 15:16:00'),
+    'loss-noturgent': pd.Timestamp('2023-11-25 15:13:00')
 }
 
 # Filter records and calculate response times
@@ -44,7 +45,8 @@ urgent_gain_response_time = response_times['gain-urgent'].mean()
 noturgent_gain_response_time = response_times['gain-noturgent'].mean()
 urgent_neutral_response_time = response_times['neutral-urgent'].mean()
 noturgent_neutral_response_time = response_times['neutral-noturgent'].mean()
-urgent_loss_response_time = response_times['neutral-noturgent'].mean()
+noturgent_loss_response_time = response_times['loss-noturgent'].mean()
+urgent_loss_response_time = response_times['loss-urgent'].mean()
 
 
 
@@ -53,6 +55,8 @@ print(f"Average response time for noturgent-gain: {noturgent_gain_response_time:
 print(f"Average response time for urgent-neutral: {urgent_neutral_response_time:.2f} minutes (Total Clicks: {total_clicks['neutral-urgent']})")
 print(f"Average response time for noturgent-neutral: {noturgent_neutral_response_time:.2f} minutes (Total Clicks: {total_clicks['neutral-noturgent']})")
 print(f"Average response time for urgent-loss: {urgent_loss_response_time:.2f} minutes (Total Clicks: {total_clicks['loss-urgent']})")
+print(f"Average response time for urgent-loss: {noturgent_loss_response_time:.2f} minutes (Total Clicks: {total_clicks['loss-noturgent']})")
+
 
 results = {}
 for key in response_times:
