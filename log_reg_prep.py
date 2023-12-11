@@ -1,31 +1,41 @@
 import pandas as pd
+import statsmodels.api as sm
+import numpy as np
+# Creating a dataset for the analysis
+data = {
+    'Condition': ['gain-urgent', 'neutral-urgent', 'loss-urgent', 'gain-noturgent', 'neutral-noturgent', 'loss-noturgent'],
+    'Framing ': ['gain', 'neutral', 'loss', 'gain', 'neutral', 'loss'],
+    'Urgency': ['urgent', 'urgent', 'urgent', 'not urgent', 'not urgent', 'not urgent'],
+    'Detection Difficulty Numeric': [1, 3, 2, 1, 3, 2],  # Assuming numeric values for difficulty
+    'Click Rate': [0.06531, 0.13027, 0.08319, 0.07453, 0.14286, 0.09724]
+}
 
-# Sample data (you would use your actual data)
-total_sent = {'gain-urgent': 232, 'gain-noturgent': 201, 'neutral-urgent': 213, 'neutral-noturgent': 211, 'loss-urgent': 202, 'loss-noturgent': 204}
-total_clicks = {'gain-urgent': 13, 'gain-noturgent': 17, 'neutral-urgent': 21, 'neutral-noturgent': 18, 'loss-urgent': 14, 'loss-noturgent': 18}
+df = pd.DataFrame(data)
+df['Detection Difficulty Numeric'] = pd.to_numeric(df['Detection Difficulty Numeric'], errors='coerce')
+df['Click Rate'] = pd.to_numeric(df['Click Rate'], errors='coerce')
 
-# Reconstruct the dataset
-data = []
-for condition, clicks in total_clicks.items():
-    # Add clicked entries
-    for _ in range(clicks):
-        data.append([condition, 1])  # 1 for clicked
-    # Add not clicked entries
-    not_clicked = total_sent[condition] - clicks
-    for _ in range(not_clicked):
-        data.append([condition, 0])  # 0 for not clicked
+# Encoding the categorical data
+df_encoded = pd.get_dummies(df, columns=['Framing ', 'Urgency'], drop_first=True)
+import pandas as pd
+import statsmodels.api as sm
 
-# Create DataFrame
-df = pd.DataFrame(data, columns=['condition', 'clicked'])
+# Assuming 'df' is your DataFrame
+# Encoding the categorical data
+df_encoded = pd.get_dummies(df, columns=['Framing ', 'Urgency'], drop_first=True)
 
-# Split condition into framing and urgency
-split_columns = df['condition'].str.split('-', expand=True)
-df['framing'] = split_columns[0]
-df['urgency'] = split_columns[1]
+# Defining the dependent variable (Click Rate) and independent variables
+X = df_encoded.drop(['Click Rate', 'Condition'], axis=1)
+y = df_encoded['Click Rate']
 
-# One-hot encode the categorical variables
-df = pd.get_dummies(df, columns=['framing', 'urgency'])
-output_file_path = 'log_reg.csv'
-df.to_csv(output_file_path, index=False)
-# Resulting DataFrame
-print(df.head())
+# Ensure X is all numeric
+print(X.dtypes)  # Check to ensure all columns are numeric
+X = X.select_dtypes(include=[np.number])  # Select only numeric columns
+
+# Adding a constant to the model (intercept)
+X = sm.add_constant(X)
+
+# Performing Multiple Regression Analysis
+model = sm.OLS(y, X).fit()
+
+# Printing the summary of the regression
+print(model.summary())
